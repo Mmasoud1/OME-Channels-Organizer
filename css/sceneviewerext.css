@@ -1,0 +1,770 @@
+
+
+
+:root {
+  --body-bg-color: black;                             /*      var(--body-bg-color)             */
+  --body-font-color: white;                           /*      var(--body-font-color)           */
+  --body-font-size: 15px;                             /*      var(--body-font-size)            */ 
+  --div-opacity: 0.5;                                 /*      var(--div-opacity)               */     
+  --div-bg-color: rgba(0,0,0,0.5);                    /*      var(--div-bg-color)              */
+  --div-text-color: white;                            /*      var(--div-text-color)            */ 
+  --form-bg-color:rgba(255,255,255,0.5);              /*      var(--form-bg-color)             */
+  --form-text-color: black;                           /*      var(--form-text-color)           */
+  --form-navbar-bg-color: rgba(0,0,0,0.5);            /*      var( --form-navbar-bg-color)     */
+  --form-opacity: 0.5;                                /*      var(--form-opacity)              */ 
+  --form-flashing-duration: 0.3s;                     /*      var(--form-flashing-duration)    */
+  --form-flashing-repeat: 2;                          /*      var(--form-flashing-repeat)      */ 
+  --form-nav-x-hover-color: rgba(127,127,127,0.5);    /*      var(--form-nav-x-hover-color)    */
+  --scrollbar-color: rgba(255,255,255,0.5);           /*      var(--scrollbar-color)           */
+  --scrollbar-width: thin;                            /*      var(--scrollbar-width)           */
+  --cursor-type: pointer;                             /*      var(--cursor-type)               */
+}
+
+body {
+  /*font-family: "Lato", sans-serif;*/
+  font-size: var(--body-font-size)
+  color: var(--body-font-color);
+}
+
+#treeList {
+  margin: 0;
+  padding: 0;
+  color: var(--div-text-color);
+}
+
+ul, #treeList {
+  list-style-type: none;
+  color: var(--div-text-color);
+}
+
+
+.caret {
+  cursor: var(--cursor-type) ;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+
+}
+
+.caret::before {
+  content: "\25B6";
+  color: var(--div-text-color);
+  display: inline-block;
+  margin-right: 6px;
+  margin-left: 16px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.panel{
+  position: fixed;
+  z-index: 1;
+  background-color: var(--div-bg-color) ;
+  scrollbar-color: var(--scrollbar-color);
+  scrollbar-width: var(--scrollbar-width);
+  transition: 0.5s;
+  padding-top: 10px;  
+}
+
+.panel a {
+  text-decoration: none;
+  color: var(--div-text-color);
+  transition: 0.2s;
+
+}
+
+.itemtreepanel{
+  height: 80%;
+  width: 300px;
+  top: 90px;
+  left: 0px; 
+  margin-left: -320px;
+  overflow-x: auto;
+  overflow-y: auto;  
+  white-space: nowrap;
+  /*overflow-wrap: normal;     */
+
+}
+
+.itemtreepanel a:hover {
+  color: #888;
+}
+
+.channellistpanel{
+  height: 80%;
+  width: 300px;
+  top: 90px;
+  left: 0px; 
+  margin-left: -320px;
+  overflow-x: auto;
+  overflow-y: auto;  
+  white-space: nowrap;
+}
+
+.channellistpanel a:hover {
+  color: #888;
+}
+
+
+/*----------panel  right ------------------*/
+.hostlistpanel {
+  height: 450px;
+  width: 350px;
+  top: 90px;
+  right: 20px;  
+  margin-right: -370px;  
+  overflow-x: hidden;
+}
+
+.hostlistpanel a {
+  padding: 8px 8px 8px 32px;
+  font-size: 25px;
+  display: block;
+}
+
+.hostlistpanel a:hover {
+  color: #666;
+}
+
+.grplistpanel {
+  height: 450px;
+  width: 350px;
+  top: 90px;
+  right: 20px;  
+  margin-right: -370px;  
+  overflow-x: hidden;
+}
+
+.grplistpanel a {
+  padding: 8px 8px 8px 32px;
+  font-size: 25px;
+  display: block;
+}
+
+.grplistpanel a:hover {
+  color: #666;
+}
+
+
+
+  /* Left  Side Bars for itemTreeViewBar and channelListViewBar */        
+  .bar  {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--div-bg-color);
+    overflow-x: hidden;
+    scrollbar-color: var(--scrollbar-color);
+    scrollbar-width: var(--scrollbar-width);             
+    transition: 0.5s;
+    padding-top: 0px;
+
+  }
+
+  .bar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: var(--div-text-color);
+    display: block;
+    transition: 0.3s;
+  }
+
+  .bar  a:hover {
+    color: #444;
+  }
+
+  .itemTreebar  {
+    height: 380px;
+    top: 90px;
+    left: 20px;
+  }
+
+  .itemTreebar a {
+    font-size: 25px;
+  }
+
+
+  .channellistbar  {
+    height: 380px;
+    top: 90px;
+    left: 20px;
+  }
+
+  .channellistbar a {
+    font-size: 25px;
+  }
+
+
+ /* Right bars for itemTreeViewBar and grpListViewBar */
+  .hostlistbar{
+    height: 350px;
+    top: 90px;
+    right: 20px;    
+  }
+  
+  .hostlistbar a {
+    font-size: 14px;
+  } 
+
+  .grplistbar  {
+    height: 350px;
+    top: 90px;
+    right: 20px;
+  }
+
+  .grplistbar span:hover {
+    opacity: 0.7;
+  }
+
+  .grplistbar a {
+    font-size: 14px;
+  }
+
+ 
+
+
+ .hintpanel{
+  height: 100px;
+  width: 350;
+  margin-right:-370px;
+  top: 900px;
+  right: 20px;
+  color: var(--div-text-color);
+  overflow-x: hidden;
+  padding-left: 10px;
+}                       
+     
+
+/* -------paragraph justification ----*/
+
+.just{
+  text-align: justify;
+  text-justify: inter-word;
+  margin-left: 30px;
+  color: var(--div-text-color);
+  font-size: 14px;
+}
+
+/* Info panel right  */
+
+.infopanel{
+  height: 300px;
+  width: 300px;
+  top: 570px;
+  right: 20px;
+  margin-right: -370px;
+  overflow-x: hidden;
+}
+ 
+
+
+
+ /*   popup window for group labeling*/
+.grpform-container {
+  max-width: 680px;
+  margin: auto;
+  margin-top: 400px;
+  margin-left: 1000px;
+  background-color: var(--form-bg-color);
+  height: 150px;
+  color: white;
+  border-radius: 10px;
+  display: none;
+  overflow-x: hidden;
+  position: fixed;                                    
+  z-index: 1;
+}
+
+.grpformtopnav {
+  overflow: hidden;
+  background-color: var(--form-navbar-bg-color) ;
+  position: relative;
+  z-index: 1;
+
+}
+
+
+.grpformtopnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 27px;
+  display: block;
+}
+
+.grpformtopnav p {
+  color: white;
+  padding: 1px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.grpformtopnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+}
+
+.grpformtopnav a:hover {
+  background-color: var(--form-nav-x-hover-color);
+  color: white;
+}
+
+input {
+  margin-left: 40px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 0;
+  width: 60%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+  background: rgba(255,255,255,0.5);
+}
+
+/* Style the "Add" button */
+.addGrpBtn {
+  padding: 10.5px;
+  margin-left: 0;
+  margin-top: 20px;
+  width: 15%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: var(--cursor-type) ;
+  transition: 0.3s;
+  border-radius: 0;
+
+}
+
+.addGrpBtn:hover {
+  background-color: rgba(60,60,60,0.5);
+}
+
+.grpform-container.formflashanimation{
+  animation-name: formflashkeyframes;
+  animation-duration: var(--form-flashing-duration);
+  animation-iteration-count: var(--form-flashing-repeat);
+ }
+
+
+
+
+
+
+/*   Popup window for toolbar Settings form*/
+.settingsform-container {
+  max-width: 40%;
+  max-height: 450px;
+  margin: auto;
+  background-color: var(--form-bg-color);
+  height: 450px; 
+  width: 35%;
+  color: white;
+  border-radius: 10px;
+
+  /*text-align:center;*/
+  display: none;
+  position: fixed;
+  overflow-x: hidden;                                    
+  z-index: 1;
+  transition: 1.5s;
+
+  scrollbar-color: var(--scrollbar-color);
+  scrollbar-width: var(--scrollbar-width);
+}
+
+.settingsformtopnav {
+  overflow: hidden;
+  background-color: var(--form-navbar-bg-color);
+  position: relative;
+  z-index: 1;
+
+}
+
+
+.settingsformtopnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 27px;
+  display: block;
+}
+
+.settingsformtopnav p {
+  color: white;
+  padding: 1px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.settingsformtopnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+}
+
+.settingsformtopnav a:hover {
+  background-color: var(--form-nav-x-hover-color);
+  color: white;
+}
+
+
+/* Style the "Add" button */
+.addServerBtn {
+  padding: 10.5px;
+  margin-left: 0;
+  margin-top: 20px;
+  width: 15%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: var(--cursor-type) ;
+  transition: 0.3s;
+  border-radius: 0;
+
+}
+
+.addServerBtn:hover {
+  background-color: rgba(60,60,60,0.5);
+}
+
+.settingsform-container.zoomform{
+  transform: scale(1);
+ }
+
+
+.settingsform-container.formflashanimation{
+  animation-name: formflashkeyframes;
+  animation-duration: var(--form-flashing-duration);
+  animation-iteration-count: var(--form-flashing-repeat);
+ }
+
+  
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: var(--cursor-type) ;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px 20px;
+  height: 80%;
+}
+
+#Servers {background-color: rgba(127,127,127,0.5);}
+#About {background-color: rgba(60,60,60,0.5);}
+
+
+
+  /*   popup window for login form*/
+  .loginform-container {
+    max-width: 30%;
+    max-height: 300px;
+    margin: auto;
+    background-color: var(--form-bg-color);
+    height: 300px; 
+    width: 30%;
+    color: white;
+    border-radius: 10px;
+
+    /*text-align:center;*/
+    display: none;
+    position: fixed;                                    
+    z-index: 1;
+    overflow: hidden;
+    scrollbar-color: var(--scrollbar-color);
+    scrollbar-width: var(--scrollbar-width);
+    transition: all 1s;
+  }
+            
+   .loginform-container.zoomform{
+      transform: scale(1);
+  }
+
+
+   .loginform-container.formflashanimation{
+      animation-name: formflashkeyframes;
+      animation-duration: var(--form-flashing-duration);
+      animation-iteration-count: var(--form-flashing-repeat);
+   }
+
+
+  .loginformtopnav {
+    overflow: hidden;
+    background-color: var(--form-navbar-bg-color);
+    position: relative;
+    z-index: 1;
+
+  }
+
+
+  .loginformtopnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 27px;
+    display: block;
+  }
+
+  .loginformtopnav p {
+    color: white;
+    padding: 1px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+  }
+
+  .loginformtopnav a.icon {
+    background: black;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+  }
+
+  .loginformtopnav a:hover {
+    background-color: var(--form-nav-x-hover-color);
+    color: white;
+  }
+
+
+/*Tooltip  style*/
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100%;
+    background-color: rgba(60,60,60,0.7);
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 60px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 0%;
+    margin-left: 0px;
+    transition: opacity 1.3s;
+  }
+
+
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
+  .grid-container {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 55% 15% 15% 15% ;
+    background-color: none;
+    padding: 0px;
+    align-items: center;
+  }
+
+  .grid-item {
+    border: 0px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+  }
+
+
+  .grp-grid-container {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 85% 15% ;
+    background-color: none;
+    padding: 0px;
+    align-items: center;
+  }
+
+  .grp-grid-item {
+    border: 0px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+  }    
+
+ .grpchbar-grid-container {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 20%  80% ;
+    background-color: none;
+    padding: 0px;
+    align-items: center;
+  }
+
+  .grpchbar-grid-item {
+    border: 0px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+  }   
+
+
+ .chcolor-grid-container {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 33% 34% 33% ;
+    background-color: none;
+    padding: 0px;
+    align-items: center;
+  }
+
+  .chcolor-grid-item {
+    border: 0px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+  }  
+
+
+
+
+  .slider {
+    -webkit-appearance: none;
+    width: 60%;
+    height: 1px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+
+   /* For Chromium */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 25px;
+    background: #4CAF50;
+    /*background: rgba(255,255,255,1);*/                        
+    cursor: var(--cursor-type) ;
+  }
+
+  /* for FireFox*/
+  .slider::-moz-range-thumb {
+    width: 10px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: var(--cursor-type) ;
+  }    
+
+  .chnlsettingsright{
+    height: auto;
+    width: 350px;
+    position: fixed;
+    z-index: 1;
+    top: 570px;
+    right: 20px;
+    margin-right: -370px;
+    background-color: var(--div-bg-color);
+    overflow-x: hidden;
+    scrollbar-color: var(--scrollbar-color);
+    scrollbar-width: var(--scrollbar-width);
+    transition: 0.5s;
+    padding-top: 10px;
+  }
+
+   .chnlsettingsright.formflashanimation{
+      animation-name: formflashkeyframes;
+      animation-duration: var(--form-flashing-duration);
+      animation-iteration-count: var(--form-flashing-repeat);
+   }
+
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 0px solid white;
+      text-align: center;
+      padding: 0px;
+      color: white;
+    }
+    th i:hover{
+      color: #444;
+      cursor: var(--cursor-type) ;
+    }
+
+
+label {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  text-align: right;
+  clear: both;
+  float:left;
+  margin-left: 35px;
+  margin-top: 20px;
+}
+
+legend{
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+}
+
+a{
+  /* To remove underline from link*/
+  text-decoration: none;
+}
+
+  @keyframes formflashkeyframes {
+    0%    {opacity: 1;}
+    50%   {opacity: 0.5;}
+    100%  {opacity: 1;}
+  }
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
