@@ -991,9 +991,26 @@ function renderTreeView(collectionIndex){
 
 function resetLastTreeItemSelection(){
      lastHostCollectSelectionStates.itemId = null;
+     resetCurTreeItemSelection()
+}
+
+function resetCurTreeItemSelection(){
+     currentHostCollectSelectionStates.item = null;
+     clearTreeView()
+
 }
 
 //------- Host and Collection selections ----//
+function resetCurSelectedCollectiotFolders(){
+      currentHostCollectSelectionStates.collectionFolders = null;
+      resetLastTreeItemSelection()
+}
+
+
+function resetCurCollectionList(){
+      currentHostCollectSelectionStates.collectionList = null;
+      resetCurSelectedCollectiotFolders()
+}
 
 function onSelectedCollection(hostIndex, collectionIndex){
 
@@ -1031,7 +1048,8 @@ function onSelectedHost(hostIndex){
           if(lastHostCollectSelectionStates.hostIndex!=0){
               lastHostCollectSelectionStates.hostChanged=1;
               document.getElementById("Host"+lastHostCollectSelectionStates.hostIndex).style.backgroundColor = Opts.defaultElemBgColor
-              document.getElementById("HostFont"+lastHostCollectSelectionStates.hostIndex).style.color = Opts.defaultElemFontColor  
+              document.getElementById("HostFont"+lastHostCollectSelectionStates.hostIndex).style.color = Opts.defaultElemFontColor 
+              resetCurCollectionList()  
           }
           else{
            //   if(toggleLeft)toggleNavLeft();
@@ -2191,8 +2209,8 @@ function initChannelList(omeChannels, itemName){
           } catch (e) {
             message = xhr.response;
             console.log(`Not JSON response for request to ${xhr.responseURL}`);
+            triggerHint(`Not JSON response for request  ${xhr.responseURL}`,'error')
           }
-          // webix.message({ text: message, expire: 5000 });
           triggerHint(message,'info', 5000)
           break;
         }
