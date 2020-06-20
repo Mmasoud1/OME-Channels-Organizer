@@ -13,4 +13,4 @@ For creating OME channel groups, browse to your server file and click design mod
 
 ## Show Me
 
-![App Interface](https://github.com/Mmasoud1/OME-Channels-Organizer/blob/master/ShowMe/OMEDemo.png)
+![App Interface](https://github.com/Mmasoud1/OME-Channels-Organizer/blob/master/ShowMe/OMEDemo.gif)
