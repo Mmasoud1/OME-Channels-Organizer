@@ -3,7 +3,7 @@ An interactive tool to manage, manipulate, store the multi-channels OME-Tiff fil
 
 For citation please mention the link:
 
-`https://github.com/Mmasoud1/OME-Channels-Organize`
+`https://github.com/Mmasoud1/OME-Channels-Organizer`
 
 The tool is using Digital Slide Archive as a backbone to update the image metadata remotely or locally.
 
