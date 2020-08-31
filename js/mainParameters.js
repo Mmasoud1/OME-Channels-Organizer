@@ -1,6 +1,10 @@
-//-- Coded by Mohamed Masoud, Dr. Gutman Lab, Emory University --//
-//-- OME Channel Organizer -- //
-//-- mainParameters: 
+/*Browse, visualize, and create  OME groups 
+
+Version:  OME-ORG Demo v1.0.0
+Github:   https://github.com/Mmasoud1
+Author:   Mohamed Masoud
+email:    mmasoud2@outlook.com
+*/
 
   //---------- initialize Globals-------//  
    
