@@ -715,6 +715,14 @@ email:    mmasoud2@outlook.com
       }
 
      function loadEmptyOmeDataset(){
+                return {
+                    "Groups": [],
+                    "Header": null,
+                    "Images": [],
+                    "Layout": {},
+                    "Name": null,
+                    "Stories": []
+                 } 
      
      } 
 
@@ -1340,7 +1348,7 @@ function initHostList(){
        var hostIndex = Settings.dsaServers[i-1].id;
         nodes +=  '<li style="background-color: none" id="Host'+hostIndex+'"><a href="javascript:void(0)"  onclick="onSelectedHost('+hostIndex+')"><font  size="3" id="HostFont'+hostIndex+'">'+hostName+'</font></a></li>'
     }
-    document.getElementById("hostsList").innerHTML +=nodes;
+    document.getElementById("hostsList").innerHTML += nodes;
 }  
 
   //////////////////////////////////// 
@@ -1360,9 +1368,10 @@ function hexToRgb(hex) {
 
 function onChannelCheckboxClick(channelIndex){
 
-   var omeSceneDescription = currentHostCollectSelectionStates.item.meta.omeSceneDescription;
+   let omeSceneDescription = currentHostCollectSelectionStates.item.meta.omeSceneDescription;
+   let channelEntry = findObjectByKey(omeSceneDescription, 'channel_number', channelIndex);
    if(!tempSceneSelections.length) {
-         tempSceneSelections.push( omeSceneDescription[channelIndex])
+         tempSceneSelections.push( channelEntry)
          document.getElementById("ChannelCheckboxId"+channelIndex).innerHTML = '<i class="fa fa-check-square" >&nbsp&nbsp</i>'
    }
    else{
@@ -1372,7 +1381,7 @@ function onChannelCheckboxClick(channelIndex){
           document.getElementById("ChannelCheckboxId"+channelIndex).innerHTML = '<i class="fa fa-square" >&nbsp&nbsp</i>'
 
         }else{
-          tempSceneSelections.push( omeSceneDescription[channelIndex])
+          tempSceneSelections.push( channelEntry)
           document.getElementById("ChannelCheckboxId"+channelIndex).innerHTML = '<i class="fa fa-check-square" >&nbsp&nbsp</i>'
         }
     }
@@ -1396,7 +1405,7 @@ function getOMETileSourceColored(hostApi, _id, frame, palette1="rgb(0,0,0)", pal
     }
   })
 
-  return tile
+  return tile;
 }
 
 
