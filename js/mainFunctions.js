@@ -2034,13 +2034,13 @@ function initChannelList(omeChannels, itemName){
 
 
   function confirmSettingsFormChanges(){
-     if(isServerListChanged()){      
+     if(isServerListChanged()) {      
         comfirmServerListChangesInSettings();     
-     } else if(isOptionsListChanged()) {  
-        comfirmOptionsListChangesInSettings();
-     } else {
-       closeSettingsForm();
      } 
+     if(isOptionsListChanged()) {  
+        comfirmOptionsListChangesInSettings();
+     }
+     closeSettingsForm();
   }  
  
   function cancelSettingsFormChangess(){
