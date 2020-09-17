@@ -1349,6 +1349,11 @@ function initHostList(){
         nodes +=  '<li style="background-color: none" id="Host'+hostIndex+'"><a href="javascript:void(0)"  onclick="onSelectedHost('+hostIndex+')"><font  size="3" id="HostFont'+hostIndex+'">'+hostName+'</font></a></li>'
     }
     document.getElementById("hostsList").innerHTML += nodes;
+
+    if(Settings.dsaServers.length){
+       onSelectedHost(Settings.dsaServers[0].id);
+    }
+
 }  
 
   //////////////////////////////////// 
