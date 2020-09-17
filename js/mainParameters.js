@@ -12,7 +12,8 @@ email:    mmasoud2@outlook.com
    DSA_SERVER_LIST.push(
                     {id: "1", value: "Girder", hostAPI: "http://dermannotator.org:8080/api/v1"},
                     {id: "2", value: "Cancer digital slide archive", hostAPI: "http://candygram.neurology.emory.edu:8080/api/v1"},
-                    {id: "3", value: "Styx", hostAPI: "https://styx.neurology.emory.edu/girder/api/v1/"}    
+                    {id: "3", value: "Styx", hostAPI: "https://styx.neurology.emory.edu/girder/api/v1/"}    ,
+                    {id: "4", value: "HMIF", hostAPI: "https://imaging.htan.dev/girder/api/v1/"}    ,
                     )
    var Settings = []
 
