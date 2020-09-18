@@ -1,4 +1,7 @@
 # OME-Channels Organizer
+Copyright 2020 Mohamed Masoud
+
+
 An interactive tool to manage, manipulate, store the multi-channels OME-Tiff files .
 
 For citation please mention the link:
@@ -15,6 +18,8 @@ For the online version, you need to create your account on any DSA servers and u
 
 For creating OME channel groups, browse to your server file and click design mode with the tool as in show me section below.
 
+## License.
+[CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/3.0/) license
 
 
 ## Show Me
