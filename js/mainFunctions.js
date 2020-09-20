@@ -928,6 +928,11 @@ function onTreeClickEvent(){
           this.classList.toggle("caret-down");             
         });
       }
+       
+      for (i = 0; i < toggler.length; i++) {
+        toggler[i].click();
+      }
+
 }
 
 function createTree(foldersList) { // recursive call to build the tree 
@@ -940,12 +945,12 @@ function createTree(foldersList) { // recursive call to build the tree
          if( ! documentType.localeCompare("folder")  ){
              nodes += '<li style="background-color: none" id="folder'+documentId+'"><span class="caret"><font  size="3" id="folderFont'+documentId+'">'+documentName+'</font></span>'
 
-             var folderDetails = getFolderDetails(hostAPI, documentId);   // e.g  "nFolders": 0,  "nItems": 1
+             var folderDetails = getFolderDetails(hostAPI, documentId);   // e.g.  "nFolders": 0,  "nItems": 1
 
              if(folderDetails.nFolders){
                 var subFoldersList = getFoldersList(hostAPI, documentId, parentType="folder")
                 nodes += '<ul class="nested">'
-                nodes += createTree(subFoldersList)  // Recursive call till finish all subfolders with then the collection. 
+                nodes += createTree(subFoldersList)  // Recursive call till finish all subfolders within the collection. 
                 nodes += '</ul>' 
               }
               else{
@@ -1008,20 +1013,20 @@ function resetLastTreeItemSelection(){
 
 function resetCurTreeItemSelection(){
      currentHostCollectSelectionStates.item = null;
-     clearTreeView()
+     clearTreeView();
 
 }
 
 //------- Host and Collection selections ----//
 function resetCurSelectedCollectiotFolders(){
       currentHostCollectSelectionStates.collectionFolders = null;
-      resetLastTreeItemSelection()
+      resetLastTreeItemSelection();
 }
 
 
 function resetCurCollectionList(){
       currentHostCollectSelectionStates.collectionList = null;
-      resetCurSelectedCollectiotFolders()
+      resetCurSelectedCollectiotFolders();
 }
 
 function onSelectedCollection(hostIndex, collectionIndex){
@@ -1070,7 +1075,7 @@ function onSelectedHost(hostIndex){
           document.getElementById("Host"+hostIndex).style.backgroundColor= Opts.selectedElemBgColor;
           document.getElementById("HostFont"+hostIndex).style.color = Opts.selectedElemFontColor;
           lastHostCollectSelectionStates.hostIndex = hostIndex;
-          lastHostCollectSelectionStates.collectionIndex=0;
+          lastHostCollectSelectionStates.collectionIndex = 0;
 
           autoLogin(function(){
                                initCollectionsList(hostAPI, hostIndex)
@@ -1324,18 +1329,19 @@ function compositeFrames(curGroup, compositeType = 'difference') {
  //------- Host and Collection initialion ----//
 ///////////////////////////////////////////////
 
-function initCollectionsList(hostAPI, hostIndex){ 
-    var nodes="";
-    document.getElementById("collectionsTitle").innerHTML="Collections:";    
+function initCollectionsList(hostAPI, hostIndex) { 
+    var nodes = "";
+    document.getElementById("collectionsTitle").innerHTML = "Collections:";    
     var collectList = getCollectionsList(hostAPI);
     currentHostCollectSelectionStates.collectionList = collectList;
-    document.getElementById("collectionsList").innerHTML=""; 
+    document.getElementById("collectionsList").innerHTML = ""; 
 
-    for(var i=1; i<= collectList.length; i++){
+    for(var i = 1; i <= collectList.length; i++) {
        var collectionName = collectList[i-1].name; 
        nodes +=  '<li style="background-color: none" id="colLi'+hostIndex+'-'+i+'"><a href="javascript:void(0)" onclick="onSelectedCollection('+hostIndex+','+i+')"><font size="3" id="colFont'+hostIndex+'-'+i+'">'+collectionName+'</font></a></li>'
     }
-    document.getElementById("collectionsList").innerHTML +=nodes;
+    document.getElementById("collectionsList").innerHTML += nodes;
+
 } 
 
 
@@ -1520,7 +1526,7 @@ function initChannelList(omeChannels, itemName){
           nodes += '<a href="javascript:void(0)" style ="outline:none;" onclick="viewerZoomIn()"><i class="fa fa-search-plus"></i></a>'
           nodes += '<a href="javascript:void(0)" style ="outline:none;" onclick="viewerZoomOut()"><i class="fa fa-search-minus"></i></a>'
           nodes += '<a href="javascript:void(0)" style ="outline:none;" onclick="goToOnlineItem()"> <i class="fa fa-cloud"></i></a>'
-          nodes += '<a href="javascript:void(0)" style ="outline:none;" onclick="createNewGroup()"><div class="tooltip"><i class="fa fa-stop-circle"></i><span class="tooltiptext">Add</span></div></a>'
+          nodes += '<a href="javascript:void(0)" style ="outline:none;" onclick="createNewGroup()"><div class="tooltip"><i class="fa fa-plus-circle"></i><span class="tooltiptext">Add</span></div></a>'
           nodes += '<a href="javascript:void(0)" style ="outline:none;" onclick="resetChannelCheckboxes()"><div class="tooltip"><i class="fa fa-repeat"></i><span class="tooltiptext">reset</span></div></a>'        
       }
       document.getElementById(barId).innerHTML = nodes;
