@@ -163,16 +163,16 @@ email: mmasoud2@outlook.com
         </colgroup>   
          
       <tr>
-        <th style="text-align: left"><label for="id1">Color:</label></th>      
+        <th style="text-align: left"><label >Color:</label></th>      
         <th ><div class="tooltip"><input id="chColorInputId" onchange="chColorChanged()"  onmouseover="onColorPickerMouseover()"><span class="tooltiptext" style="width: 50%; left: 50%;" id="chColorInputTooltip"></span></div> </th>
       </tr>
 
       <tr>
-        <th style="text-align: left"><label for="id1">Contrast-Max:</label></th>      
+        <th style="text-align: left"><label >Contrast-Max:</label></th>      
         <th ><div class="tooltip"><input type="range" min="1000" max="65000" value="32500" class="slider" id="maxContrastRange" onchange="contrastChanged()" onmouseover="onContrastMaxSliderMouseover()"  ><span class="tooltiptext" style="width: 50%; left: 50%;" id="contrastMaxValueTooltip"></span></div></th>
       </tr>
       <tr>
-        <th style="text-align: left"><label for="id2">Contrast-Min:</label></th>      
+        <th style="text-align: left"><label >Contrast-Min:</label></th>      
         <th><div class="tooltip"> <input type="range" min="1" max="10000" value="500" class="slider" id="minContrastRange" onchange="contrastChanged()" onmouseover="onContrastMinSliderMouseover()" ><span class="tooltiptext" style="width: 50%; left: 50%;" id="contrastMinValueTooltip"></span></div> </th>
       </tr>      
     </table>  
@@ -192,6 +192,35 @@ email: mmasoud2@outlook.com
       </tr>
 
     </table>   
+</div>
+
+<!-- Open Channel Enhancement Sliders -->
+<div id="chEnhanceColorContrastPanel" class="chnlsettingsright" layout="Design">
+  <p class="just" style="margin-left: 10px"><font size="4" ><i style="font-size:25px" class="fa fa-sliders"></i> &nbsp CHNL Enhancement </font></p> 
+  <hr> 
+
+    <table>
+        <colgroup>
+          <!-- Width of each column -->
+        <col style="width:40%">
+        <col style="width:60%">
+        </colgroup>   
+         
+      <tr>
+        <th style="text-align: left"><label >Color:</label></th>      
+        <th ><div class="tooltip"><input id="chEnhanceColorInputId" onchange="chEnhanceColorChanged()"  onmouseover="onChEnhanceColorPickerMouseover()"><span class="tooltiptext" style="width: 50%; left: 50%;" id="chEnhanceChColorInputTooltip"></span></div> </th>
+      </tr>
+
+      <tr>
+        <th style="text-align: left"><label >Contrast-Max:</label></th>      
+        <th ><div class="tooltip"><input type="range" min="1000" max="65000" value="32500" class="slider" id="chEnhanceMaxContrastRange" onchange="chEnhanceContrastChanged()" onmouseover="onChEnhanceContrastMaxSliderMouseover()"  ><span class="tooltiptext" style="width: 50%; left: 50%;" id="chEnhancepContrastMaxValueTooltip"></span></div></th>
+      </tr>
+      <tr>
+        <th style="text-align: left"><label >Contrast-Min:</label></th>      
+        <th><div class="tooltip"> <input type="range" min="1" max="10000" value="500" class="slider" id="chEnhanceMinContrastRange" onchange="chEnhanceContrastChanged()" onmouseover="onChEnhanceContrastMinSliderMouseover()" ><span class="tooltiptext" style="width: 50%; left: 50%;" id="chEnhanceContrastMinValueTooltip"></span></div> </th>
+      </tr>      
+    </table>  
+  
 </div>
 
 

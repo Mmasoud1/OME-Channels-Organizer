@@ -302,12 +302,110 @@ email:    mmasoud2@outlook.com
                document.getElementById("eyeIcon." + grpChannelIndex).className = "fa fa-eye"
                viewer.world.getItemAt(grpChannelIndex).setOpacity(1);
         }
-        showPanel("chColorContrastPanel", false) 
+        showPanel("chColorContrastPanel", false); 
     }else{
 
          triggerHint("Confirm or Cancel CHNL Settings")
     }
    }
+
+
+//------------ Channel Enhancement Panel ---------------//
+
+    function onChEnhanceSettingsAdjust(channelIndex, min, max, color = null){
+
+        let hostAPI = currentHostCollectSelectionStates.hostObject.hostAPI;
+        let item = currentHostCollectSelectionStates.item;
+          
+        let palette1 = "rgb(0,0,0)";
+        let palette2 = "rgb(127,127,127)";
+
+        if (color != null){
+             palette2 = rgbObj2Str(hexToRgb(color));
+        }
+
+        let tileToReplace = viewer.world.getItemAt(0);
+
+        viewer.addTiledImage({
+          tileSource: getOMETileSourceColored(hostAPI, item._id, channelIndex, palette1, palette2, min, max),
+          opacity: 1,
+          success: function (obj) {
+            viewer.world.removeItem(tileToReplace);
+          }
+        });
+   }
+
+   function getChEnhanceColorValue(){
+       let colorValue = document.getElementById("chEnhanceColorInputId").value
+
+       if(colorValue.includes("#")){
+          colorValue = colorValue.split("#")[1] // exclude # sign 
+       }
+       return colorValue
+   }
+
+   function getChEnhanceSlideContrastMax(){
+       var maxValue = document.getElementById("chEnhanceMaxContrastRange").value
+       return maxValue
+   }
+
+   function getChEnhanceSlideContrastMin(){
+       var minValue = document.getElementById("chEnhanceMinContrastRange").value
+       return minValue
+   }
+
+   
+   function onChEnhanceColorPickerMouseover(){
+       document.getElementById("chEnhanceChColorInputTooltip").innerHTML = getChEnhanceColorValue();  
+   }
+
+   function onChEnhanceContrastMaxSliderMouseover(){
+       document.getElementById("chEnhancepContrastMaxValueTooltip").innerHTML = getChEnhanceSlideContrastMax();
+   } 
+
+   function onChEnhanceContrastMinSliderMouseover(){
+       document.getElementById("chEnhanceContrastMinValueTooltip").innerHTML = getChEnhanceSlideContrastMin();
+   } 
+
+  function chEnhanceColorChanged() { 
+        var channelIndex = channelStates.currentIndex   
+        document.getElementById("chEnhanceChColorInputTooltip").innerHTML = getChEnhanceColorValue();  
+        onChEnhanceSettingsAdjust(channelIndex, getChEnhanceSlideContrastMin(), getChEnhanceSlideContrastMax(), getChEnhanceColorValue())
+        changeChEnhanceContrastSliderThumbColor(getChEnhanceColorValue())
+
+  }
+
+   function chEnhanceContrastChanged() {  
+       var channelIndex = channelStates.currentIndex    
+       onChEnhanceSettingsAdjust( channelIndex, getChEnhanceSlideContrastMin(), getChEnhanceSlideContrastMax(), getChEnhanceColorValue())
+   }  
+
+
+   function changeChEnhanceContrastSliderThumbColor(thumbColor){
+        if(thumbColor.length == 6){
+           thumbColor = '#'+thumbColor 
+        }
+        var styleScript = document.createElement('style');
+        styleScript.type = 'text/css';
+        if(!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)){
+          styleScript.innerHTML = '.slider::-webkit-slider-thumb{width: 10px;  height: 25px; background:' +thumbColor + '; cursor: pointer;}';
+        }
+        if((navigator.userAgent.toLowerCase().indexOf('firefox') > -1)|| (typeof InstallTrigge !== 'undefined')){
+          styleScript.innerHTML = '.slider::-moz-range-thumb {width: 10px;  height: 25px; background:' +thumbColor + '; cursor: pointer;}';        
+        }
+        document.getElementsByTagName('head')[0].appendChild(styleScript);
+        document.getElementById('chEnhanceMaxContrastRange').className = 'slider';
+   }
+   
+   function customizeChEnhanceColor(/*channelIndex*/){
+          changeContrastSliderThumbColor("FFFFFF");
+          document.getElementById("chEnhanceColorInputId").value  = "FFFFFF";
+          $("#chEnhanceColorInputId").spectrum({
+                                          color: "#"+"FFFFFF"
+                                      });
+          showPanel("chEnhanceColorContrastPanel", true);
+   }
+
 
    //------------ Channel Settings Panel ---------------//
     function resetChColorContrastStates(){
@@ -499,7 +597,7 @@ email:    mmasoud2@outlook.com
                     curChColorContrastStates.originalContrastMin = curChColorContrastStates.newContrastMin = currentItemInfo.omeDataset.Groups[groupIndex-1].Contrast_Min[idx]
                     curChColorContrastStates.chIndex = grpChannelIndex
                     curChColorContrastStates.grpIndex = groupIndex
-                    showPanel("chColorContrastPanel", true)   
+                    showPanel("chColorContrastPanel", true);   
 
                   }else{
                           document.getElementById("eyeIcon." + idx).className = "fa fa-eye-slash"
@@ -537,6 +635,10 @@ email:    mmasoud2@outlook.com
 
         var curGroup = currentItemInfo.omeDataset.Groups[groupIndex-1];
         reloadOSD(curGroup);
+
+        if(isPanelActive("chEnhanceColorContrastPanel")){
+           showPanel("chEnhanceColorContrastPanel", false);
+        }
         // //--Initialize annotation labels on right panel--//
         clearGrpBarRight();
         curGroup.Colors.forEach(function (clr, idx) {
@@ -688,11 +790,14 @@ email:    mmasoud2@outlook.com
 
 
     function clearGrpBarRight(){
-        if(!(document.getElementById("grpListViewBar").innerHTML === "")){
-             var node= document.getElementById("grpListViewBarBtn");
-             document.getElementById("grpListViewBar").innerHTML = ""
-             document.getElementById("grpListViewBar").append(node)
-             showPanel("chColorContrastPanel", false) 
+        if(!(document.getElementById("grpListViewBar").innerHTML === "")) {
+             var node = document.getElementById("grpListViewBarBtn");
+             document.getElementById("grpListViewBar").innerHTML = "";
+             document.getElementById("grpListViewBar").append(node);
+             showPanel("chColorContrastPanel", false);
+             if(isPanelActive("chEnhanceColorContrastPanel")) {
+                showPanel("chEnhanceColorContrastPanel", false);
+             }             
         }
 
     }
@@ -1450,6 +1555,7 @@ function onSelectedChannel(channelIndex){
            else{
           
            }
+
           document.getElementById("Channel"+channelIndex).style.backgroundColor= Opts.selectedElemBgColor;
           document.getElementById("ChannelFont"+channelIndex).style.color = Opts.selectedElemFontColor;
           channelStates.lastIndex = channelIndex;
@@ -1461,8 +1567,9 @@ function onSelectedChannel(channelIndex){
                 tileSource: getOMETileSource(hostAPI, item._id, channelIndex),
                 opacity: 1,
                 success: function (obj) {
-                     clearGrpBarRight()
-                     resetGrpSelection()
+                     clearGrpBarRight();
+                     resetGrpSelection();
+                     customizeChEnhanceColor(/*channelIndex*/);
                 }
               });
            } 
